@@ -39,7 +39,7 @@ class Vehicle {
   }
 
   flee(enemies){
-    let fear = 60;
+    let fear = 100;
     let sum = createVector();
     let count = 0;
     for (var i = 0; i < enemies.length; i++) {
@@ -67,26 +67,29 @@ class Vehicle {
     this.position.add(this.velocity);
     this.acceleration.mult(0);
 
-      this.history.push(createVector(this.position.x, this.position.y));
+    //  this.history.push(createVector(this.position.x, this.position.y));
 
 }
 show(){
 
-  noFill();
 
-  if(this.terminator){
+
+/*   if(this.terminator){
     stroke(200,255,0)
   }else {
       stroke(255);
   }
 
-  beginShape();
-  for (var i = 0; i < this.history.length; i = i+1) {
+ beginShape();
+  for (var i = 0; i < this.history.length; i = i+2) {
     let pos = this.history[i];
     vertex(pos.x, pos.y);
   }
-  endShape();
+  endShape();*/
   fill(255);
+  extraCanvas.fill(255);
+  extraCanvas.stroke(255);
+  extraCanvas.circle(this.position.x, this.position.y, 0.5);
   circle(this.position.x, this.position.y, 10);
 }
 

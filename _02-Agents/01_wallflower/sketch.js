@@ -1,6 +1,8 @@
 let center;
 let vehicles =[];
 let terminators = [];
+p5.disableFriendlyErrors = true;
+let extraCanvas;
 
 function randPointInR(radius, pointX, pointY){
   a = random() * 2 * PI;
@@ -22,10 +24,13 @@ function randPointInRing(radius1, radius2, pointX, pointY){
 function setup() {
 
 
+
   pixelDensity(2); //Retina
 
  //center point of viewport
   canv = createCanvas(windowWidth, windowHeight);
+  extraCanvas = createGraphics(windowWidth, windowHeight);
+  extraCanvas.clear();
   center = createVector(windowWidth/2, windowHeight/2);
   background(0);
 
@@ -39,14 +44,13 @@ function setup() {
      tree.leaves.push(new Leaf(1, fontPoints[i].x, fontPoints[i].y));
    }
 */
-for(i = 0; i<300; i++){
-
+for(i = 0; i<400; i++){
   let target = randPointInR(200, center.x, center.y);
   let toAdd = new Vehicle(center.x, center.y, target.x, target.y)
   toAdd.velocity = createVector(random(-1,1),random(-10,5))
   vehicles.push(toAdd)
 
-}
+  }
 }
 
 function draw() {
@@ -54,23 +58,24 @@ function draw() {
   background(0);
   color(255);
 
+  image(extraCanvas,0,0);
   for (var i = 0; i < vehicles.length; i++) {
       vehic = vehicles[i]
     vehic.flee(vehicles);
   //  vehic.seek(vehicles);
     vehic.update();
-    vehic.show();
-    if(vehic.found){
+    vehic.show();}
+  /*  if(vehic.found){
       nextTarg = randPointInRing(50,200,center.x,center.y);
       terminators.push((new Vehicle(vehic.position.x, vehic.position.y, nextTarg.x, nextTarg.y, vehic.velocity.x, vehic.velocity.y)));
     }
   }
 
 
-/*for (var i = terminators.length -1; i >= 0; i--) {
+for (var i = terminators.length -1; i >= 0; i--) {
   if(terminators[i].arrived){terminators.splice(1, i)}
 }*/
-
+/*
 for (var i = 0; i < terminators.length; i++) {
   terminator = terminators[i]
   terminator.flee(vehicles);
@@ -95,4 +100,5 @@ if (terminators.length>50) {
     for (var i = 0; i < 2; i++) {
       terminators.splice(i, 1)}
 }
+*/
 }
