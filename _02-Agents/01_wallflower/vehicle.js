@@ -11,15 +11,14 @@ class Vehicle {
     this.terminator = false;
     this.history = [];
     this.arriveR = 40;
+    this.lastPosition = createVector(posX, posY);
 }
 
   applyForce(vecForce){
     this.acceleration = vecForce;
   }
   seek(){
-
     let desired = p5.Vector.sub(this.target, this.position);
-
     if(desired.mag() < this.arriveR && desired.mag() > this.arriveR - 2){
       this.found = true;
     }
@@ -39,7 +38,7 @@ class Vehicle {
   }
 
   flee(enemies){
-    let fear = 100;
+    let fear = windowWidth/20;
     let sum = createVector();
     let count = 0;
     for (var i = 0; i < enemies.length; i++) {
@@ -51,7 +50,8 @@ class Vehicle {
         diff.div(d)
         sum.add(diff.x,diff.y);
         count++;
-    }}
+    }
+  }
     //sum.div(count);
     sum.setMag(this.maxSpeed)
     let desired = p5.Vector.sub(this.target, this.position);
@@ -72,25 +72,25 @@ class Vehicle {
 }
 show(){
 
-
-
 /*   if(this.terminator){
     stroke(200,255,0)
   }else {
       stroke(255);
   }
+*/
 
- beginShape();
-  for (var i = 0; i < this.history.length; i = i+2) {
-    let pos = this.history[i];
-    vertex(pos.x, pos.y);
-  }
-  endShape();*/
-  fill(255);
+
   extraCanvas.fill(255);
   extraCanvas.stroke(255);
-  extraCanvas.circle(this.position.x, this.position.y, 0.5);
-  circle(this.position.x, this.position.y, 10);
+  /*extraCanvas.strokeWeight(1); // with lines sounds good doesn't work
+  extraCanvas.noFill();
+  extraCanvas.beginShape(LINES);
+   extraCanvas.vertex(this.lastPosition.x, this.lastPosition.y);
+   extraCanvas.vertex(this.position.x, this.position.y);
+   extraCanvas.endShape(); */
+   this.lastPosition = this.position;
+  extraCanvas.circle(this.position.x, this.position.y, 1);
+  circle(this.position.x, this.position.y, windowWidth/200);
 }
 
 }

@@ -3,7 +3,6 @@ let vehicles =[];
 let terminators = [];
 p5.disableFriendlyErrors = true;
 let extraCanvas;
-
 function randPointInR(radius, pointX, pointY){
   a = random() * 2 * PI;
   r = radius * sqrt(random());
@@ -23,9 +22,10 @@ function randPointInRing(radius1, radius2, pointX, pointY){
 
 function setup() {
 
+  mic = new p5.AudioIn();
+  mic.start();
 
-
-  pixelDensity(2); //Retina
+  pixelDensity(1); //Retina
 
  //center point of viewport
   canv = createCanvas(windowWidth, windowHeight);
@@ -44,7 +44,8 @@ function setup() {
      tree.leaves.push(new Leaf(1, fontPoints[i].x, fontPoints[i].y));
    }
 */
-for(i = 0; i<400; i++){
+vehicles = [];
+for(i = 0; i<1; i++){
   let target = randPointInR(200, center.x, center.y);
   let toAdd = new Vehicle(center.x, center.y, target.x, target.y)
   toAdd.velocity = createVector(random(-1,1),random(-10,5))
@@ -52,9 +53,32 @@ for(i = 0; i<400; i++){
 
   }
 }
-
+function keyPressed(){
+  if (keyCode === 32) setup() // 32 = Space
+  if (keyCode === 38){
+    let actLength = vehicles.length;
+    for(i = 0; i<actLength; i++){
+      let target = randPointInR(200, center.x, center.y);
+      let toAdd = new Vehicle(vehicles[i].position.x, vehicles[i].position.y, target.x, target.y)
+      //toAdd.velocity = vehicles[i].velocity.mult(random(-5,5));
+      vehicles.push(toAdd);
+    }
+  } ; // 38 = ArrowUp
+  //if (keyCode === 40) ; // 40 = ArrowDown
+}
 function draw() {
+  console.log(mic.getLevel());
+  if (mic.getLevel()>0.2){
+    let actLength = vehicles.length;
+  for(i = 0; i<actLength; i++){
+    let target = randPointInR(200, center.x, center.y);
+    let toAdd = new Vehicle(vehicles[i].position.x, vehicles[i].position.y, target.x, target.y)
+    //toAdd.velocity = vehicles[i].velocity.mult(random(-5,5));
+    vehicles.push(toAdd)
+}
+  }
 
+  noStroke();
   background(0);
   color(255);
 
@@ -64,7 +88,8 @@ function draw() {
     vehic.flee(vehicles);
   //  vehic.seek(vehicles);
     vehic.update();
-    vehic.show();}
+    vehic.show();
+  }
   /*  if(vehic.found){
       nextTarg = randPointInRing(50,200,center.x,center.y);
       terminators.push((new Vehicle(vehic.position.x, vehic.position.y, nextTarg.x, nextTarg.y, vehic.velocity.x, vehic.velocity.y)));
