@@ -1,7 +1,7 @@
 let center;
 let vehicles =[];
 let terminators = [];
-p5.disableFriendlyErrors = true;
+
 let extraCanvas;
 function randPointInR(radius, pointX, pointY){
   a = random() * 2 * PI;
@@ -21,6 +21,7 @@ function randPointInRing(radius1, radius2, pointX, pointY){
 
 
 function setup() {
+  p5.disableFriendlyErrors = true;
 
   mic = new p5.AudioIn();
   mic.start();
