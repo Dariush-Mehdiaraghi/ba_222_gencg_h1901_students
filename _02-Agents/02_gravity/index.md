@@ -6,6 +6,7 @@ thumb_name: "thumbWF.png"
 includes:
   - src: "sketch.js"
   - src: "bole.js"
+  - src: "rigid.js"
 ---
 
 <!--
