@@ -2,7 +2,7 @@
 layout: sketch
 title: "Worms"
 category: "Experiment"
-thumb_name: "thumbWF.png"
+thumb_name: "thumbWrm.png"
 includes:
   - src: "sketch.js"
   - src: "vehicle.js"
