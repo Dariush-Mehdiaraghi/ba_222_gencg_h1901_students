@@ -62,7 +62,7 @@ function draw() {
       vehicles[i].fear += 20;
     }
   }
-  if (frameCount % 30 == 0 &&vehicles.length<=500) {
+  if (frameCount % 30 == 0 &&vehicles.length<=400) {
 
     let actLength = vehicles.length;
     for(i = 0; i<actLength; i++){

@@ -79,7 +79,7 @@ show(){
       stroke(255);
   }
 */
-fill(sin(frameCount*0.01)*10+127,sin(frameCount*0.02)*20+127,sin(frameCount*0.1)*127+127)
+fill(sin(frameCount*0.05)*127+127)
 circle(this.position.x, this.position.y, 2);
 
    this.lastPosition = this.position;
