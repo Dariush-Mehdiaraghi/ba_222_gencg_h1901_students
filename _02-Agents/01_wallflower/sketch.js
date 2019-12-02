@@ -4,13 +4,13 @@ let terminators = [];
 let video;
 let extraCanvas;
 let poseNet;
-let hand;
+let handHeight;
+let info;
 let isInRange = false;
 function randPointInR(radius, pointX, pointY){
   a = random() * 2 * PI;
   r = radius * sqrt(random());
   let point = createVector(r * cos(a), r * sin(a)).add(pointX, pointY);
-
   return point;
 }
 function randPointInRing(radius1, radius2, pointX, pointY){
@@ -30,7 +30,7 @@ function setup() {
   /*mic = new p5.AudioIn();
   mic.start(); */
 
-  pixelDensity(2); //Retina
+  pixelDensity(1); //Retina
 
  //center point of viewport
   canv = createCanvas(windowWidth, windowHeight);
@@ -38,7 +38,7 @@ function setup() {
   extraCanvas.clear();
   center = createVector(windowWidth/2, windowHeight/2);
   background(0);
-  hand = createVector(0,0)
+  handHeight = 80;
   video = createCapture(VIDEO);
   video.hide();
   let options = {
@@ -48,6 +48,7 @@ function setup() {
   }
   posenet = ml5.poseNet(video,options,modelReady);
   posenet.on("pose", gotPoses);
+  info = createDiv("RAISE YOUR HANDS!").style("position: fixed; top:50%; color: white; width:100%; text-align:center; font-family: helvetica;)")
 /*
    textFont(myFont);
    textSize(160);
@@ -70,8 +71,7 @@ for(i = 0; i<1; i++){
 function gotPoses(poses){
 
 if (poses.length>0) {
-  hand = createVector(poses[0].pose.keypoints[0].position.x, poses[0].pose.keypoints[0].position.y);
-
+  handHeight = max(poses[0].pose.keypoints[7].position.y, poses[0].pose.keypoints[8].position.y);
 }
 
 
@@ -82,13 +82,13 @@ function modelReady(){
 function keyPressed(){
   if (keyCode === 32){ setup();}// 32 = Space
   if (keyCode === 38){
-    let actLength = vehicles.length;
+    /*let actLength = vehicles.length;
     for(i = 0; i<actLength; i++){
       let target = randPointInR(200, center.x, center.y);
       let toAdd = new Vehicle(vehicles[i].position.x, vehicles[i].position.y, target.x, target.y)
       //toAdd.velocity = vehicles[i].velocity.mult(random(-5,5));
       vehicles.push(toAdd);
-    }
+    }*/
   } ; // 38 = ArrowUp
   //if (keyCode === 40) ; // 40 = ArrowDown
 }
@@ -103,10 +103,11 @@ function draw() {
     vehicles.push(toAdd)
   }
 }*/
-console.log(hand);
-if (hand.y>40){isInRange = false};
-if (hand.y<40 && !isInRange){
-  isInRange = true
+console.log(handHeight);
+if (handHeight>70){isInRange = false};
+if (handHeight<70 && !isInRange){
+  info.remove();
+  isInRange = true;
   let actLength = vehicles.length;
   for(i = 0; i<actLength; i++){
   //let target = randPointInR(200, center.x, center.y);

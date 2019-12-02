@@ -8,6 +8,7 @@ includes:
   - src: "segment.js"
   - src: "tentacle.js"
   - src: "vehicle.js"
+  - src: "bacteria.js"
 ---
 
 <!--

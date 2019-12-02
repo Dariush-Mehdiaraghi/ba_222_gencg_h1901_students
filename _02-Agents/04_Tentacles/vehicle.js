@@ -1,7 +1,7 @@
 
 class Vehicle {
   constructor(posX, posY, targX, targY, velX, velY) {
-    this.target = createVector(targX, targY);
+    this.destiny = null;
     this.position = createVector(posX, posY);
     this.velocity = createVector(velX, velY);
     this.acceleration = createVector();
@@ -19,7 +19,7 @@ class Vehicle {
     this.acceleration = vecForce;
   }
   seek(){
-    let desired = p5.Vector.sub(this.target, this.position);
+    let desired = p5.Vector.sub(this.destiny, this.position);
     if(desired.mag() < this.arriveR && desired.mag() > this.arriveR - 2){
       this.found = true;
     }
@@ -55,7 +55,7 @@ class Vehicle {
   }
     //sum.div(count);
     sum.setMag(this.maxSpeed)
-    let desired = p5.Vector.sub(this.target, this.position);
+    //let desired = p5.Vector.sub(this.destiny, this.position);
     let steer = p5.Vector.sub(sum, this.velocity);
     steer.setMag(this.maxForce);
     this.applyForce(steer);

@@ -4,16 +4,45 @@ class Tentacle {
     this.base = createVector(x,y);
     this.segments = [];
     this.target = createVector(1,2);
+    this.newTargetIndex = 0;
+    this.isSearching = true;
+    this.segmentLength = 1
     for (let i = 0; i < numberOfSegments; i++) {
-       const segment = new Segment(0,0,3,1);
+       const segment = new Segment(0,0,this.segmentLength,1);
        this.segments.push(segment);
      }
 }
+isInRange(pos){
+    return pos.dist(this.base)<=this.segmentLength*this.segments.length;
+}
 
-calculateTargetXY(newTrgt) {
- const ratio = 0.2;
- this.target.x = ratio * this.target.x + (1 - ratio) * newTrgt.x;
- this.target.y = ratio * this.target.y + (1 - ratio) * newTrgt.y;
+calculateTargetXY(particles) {
+ const ratio = 0.9;
+
+if (this.isSearching) {
+  for (var i = 0; i < particles.length; i++) {
+    if(this.isInRange(particles[i].position)&& this.isSearching && particles[i].destiny == null && !particles[i].found){ //if has no particle grabbed and one is in range
+        particles[i].destiny = this.base;
+        this.newTargetIndex = i;
+        this.isSearching = false;
+        break;
+    }
+  }
+}
+if (!this.isSearching) {
+  this.target.x = ratio * this.target.x + (1 - ratio) * particles[this.newTargetIndex].position.x;
+  this.target.y = ratio * this.target.y + (1 - ratio) * particles[this.newTargetIndex].position.y;
+
+}
+if (particles[this.newTargetIndex].position.dist(this.base)<=50) {
+   particles[this.newTargetIndex].found = true;
+   this.isSearching = true;
+   //this.newTargetIndex = 0;
+}
+
+
+
+
 }
 
 show(){

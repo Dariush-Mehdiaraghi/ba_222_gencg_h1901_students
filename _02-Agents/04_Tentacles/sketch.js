@@ -1,8 +1,8 @@
 let center;
 let vehicles =[];
+let bacterias = [];
 let terminators = [];
 let extraCanvas;
-let tentacles = [];
 function randPointInR(radius, pointX, pointY){
   a = random() * 2 * PI;
   r = radius * sqrt(random());
@@ -31,8 +31,9 @@ function setup() {
   background(0);
 
   vehicles = [];
+  bacterias = [];
+  bacterias.push(new Bacteria(100,100, 6, 50))
   for(i = 0; i<12; i++){
-    tentacles.push(new Tentacle(center.x, center.y, 20));
     let target = randPointInR(200, center.x, center.y);
     let toAdd = new Vehicle(center.x, center.y, target.x, target.y)
     toAdd.velocity = createVector(sin(i),cos(i));
@@ -41,8 +42,6 @@ function setup() {
 
 
 }
-
-
 
 
 function keyPressed(){
@@ -59,9 +58,11 @@ function keyPressed(){
       vehicles.push(toAdd);
 }
 }// 38 = ArrowUp
-  if (keyCode === 40){for (var i = 0; i < vehicles.length; i++) {
+  if (keyCode === 40){
+    for (var i = 0; i < vehicles.length; i++) {
       vehicles[i].fear += 10;
-    }} ; // 40 = ArrowDown
+    }
+  } ; // 40 = ArrowDown
 }
 function draw() {
 
@@ -70,19 +71,24 @@ function draw() {
   color(255);
   image(extraCanvas,0,0);
   for (var i = 0; i < vehicles.length; i++) {
-
-    vehic = vehicles[i];
-    vehic.flee(vehicles);
-  //  vehic.seek(vehicles);
-    vehic.update();
-    vehic.show();
+      vehic = vehicles[i];
+    if (vehic.destiny!=null &&!vehic.found) {
+      vehic.seek();
+    }if (!vehic.found) {
+        vehic.flee(vehicles);
+    }
+      vehic.update();
+      vehic.show();
+  }
+  for (var i = 0; i < bacterias.length; i++) {
+    push()
+    translate(bacterias[i].position);
+    bacterias[i].move(createVector(mouseX,mouseY));
+    pop()
+    bacterias[i].show(vehicles);
   }
 
-for (var i = 0; i < tentacles.length; i++) {
-  
-  tentacles[i].calculateTargetXY(vehic.position);
-  tentacles[i].show();
-}
+
 
 
 

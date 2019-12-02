@@ -11,7 +11,7 @@ class Vehicle {
     this.terminator = false;
   //  this.history = [];
     this.arriveR = 50;
-    this.fear = 50;
+    this.fear = 5;
     this.lastPosition = createVector(posX, posY);
 }
 
@@ -79,12 +79,12 @@ show(){
       stroke(255);
   }
 */
-fill(255)
+fill(sin(frameCount*0.01)*10+127,sin(frameCount*0.02)*20+127,sin(frameCount*0.1)*127+127)
 circle(this.position.x, this.position.y, 2);
-  extraCanvas.fill(255, 100);
+
    this.lastPosition = this.position;
 
-  extraCanvas.circle(this.position.x, this.position.y, 4);
+circle(this.position.x, this.position.y, 4);
   //circle(this.position.x, this.position.y, windowWidth/200);
 }
 

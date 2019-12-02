@@ -27,7 +27,7 @@ function setup() {
   p5.disableFriendlyErrors = true;
 
 
-  pixelDensity(2); //Retina
+  pixelDensity(1); //Retina
 
   canv = createCanvas(windowWidth, windowHeight);
   extraCanvas = createGraphics(windowWidth, windowHeight);
@@ -52,25 +52,30 @@ function keyPressed(){
   if (keyCode === 32){ setup();}// 32 = Space
   if (keyCode === 38){
 
-    let actLength = vehicles.length;
 
+}// 38 = ArrowUp
+  if (keyCode === 40){}; // 40 = ArrowDown
+}
+function draw() {
+  if (frameCount % 240 == 0){
+    for (var i = 0; i < vehicles.length; i++) {
+      vehicles[i].fear += 20;
+    }
+  }
+  if (frameCount % 30 == 0 &&vehicles.length<=500) {
+
+    let actLength = vehicles.length;
     for(i = 0; i<actLength; i++){
       let target = randPointInR(200, center.x, center.y);
       let toAdd = new Vehicle(vehicles[i].position.x, vehicles[i].position.y, target.x, target.y);
       //toAdd.velocity = vehicles[i].velocity.mult(random(-1.1,1.1));
 
       vehicles.push(toAdd);
-}
-}// 38 = ArrowUp
-  if (keyCode === 40){for (var i = 0; i < vehicles.length; i++) {
-      vehicles[i].fear += 10;
-    }} ; // 40 = ArrowDown
-}
-function draw() {
 
+  }}
   noStroke();
-  background(0);
-  color(255);
+//  background(0);
+
 
   image(extraCanvas,0,0);
   for (var i = 0; i < vehicles.length; i++) {
