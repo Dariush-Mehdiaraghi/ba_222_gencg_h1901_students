@@ -7,6 +7,7 @@ includes:
   - src: "sketch.js"
   - src: "bole.js"
   - src: "rigid.js"
+  - src: "../../js/matter.min.js"
 ---
 
 <!--
