@@ -2,7 +2,7 @@
 layout: sketch
 title: "Tentacles"
 category: "Experiment"
-thumb_name: "thumbWF.png"
+thumb_name: "thumbTt.png"
 includes:
   - src: "sketch.js"
   - src: "segment.js"
