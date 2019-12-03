@@ -1,13 +1,13 @@
-var Engine = Matter.Engine,
-    //Render = Matter.Render,
-    World = Matter.World,
-    Bodies = Matter.Bodies;
+let Engine,
+    //Render,
+    World,
+    Bodies;
 let circles = [];
 let lastScreenPos = {x:null,y:null}
 let lastScrollPos = {x:null,y:null}
 let xAcelleration = 0;
     // create an engine
-var engine = Engine.create();
+let engine;
 let bottom;
 
 let leftBorder;
@@ -18,6 +18,11 @@ let topBorder;
 
 window.addEventListener("devicemotion", handleMotion, true);
 function setup(){
+    Engine = Matter.Engine,
+    //Render = Matter.Render,
+    World = Matter.World;
+    Bodies = Matter.Bodies;
+    engine = Engine.create();
     createCanvas(windowWidth,windowHeight*1.3);
     bottom = null;
     topBorder = null;
@@ -27,7 +32,7 @@ function setup(){
     mostRightBorder = null;
     circles = [];
     World.clear(engine.world);
-   Engine.clear(engine);
+    Engine.clear(engine);
 
     bottom = new rigid(windowWidth/2, windowHeight, windowWidth, 200, 1);
     topBorder = new rigid(windowWidth/2, -2, windowWidth, 2, 1);
@@ -47,7 +52,7 @@ function setup(){
     lastScreenPos.x = screenX;
     lastScreenPos.y = screenY;
     lastScrollPos.y = window.pageYOffset;
-    }
+}
 
     function mousePressed(){
       for (var i = 0; i < circles.length; i++) {
