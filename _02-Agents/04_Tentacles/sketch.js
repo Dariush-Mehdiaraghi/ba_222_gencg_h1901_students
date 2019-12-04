@@ -22,7 +22,7 @@ function randPointInRing(radius1, radius2, pointX, pointY){
 
 function setup() {
   p5.disableFriendlyErrors = true;
-  pixelDensity(2); //Retina
+  pixelDensity(1); //Retina
 
   canv = createCanvas(windowWidth, windowHeight);
   center = createVector(windowWidth/2, windowHeight/2);
@@ -30,8 +30,8 @@ function setup() {
 
   vehicles = [];
   bacterias = [];
-  bacterias.push(new Bacteria(center.x, center.y, 6, 50))
-  for(i = 0; i<80; i++){
+  bacterias.push(new Bacteria(center.x, center.y, 6, windowWidth/100))
+  for(i = 0; i<windowWidth/10; i++){
 
     let toAdd = new Vehicle(random(0,windowWidth), random(0,windowHeight))
 
@@ -47,7 +47,6 @@ function keyPressed(){
   if (keyCode === 38){
 
     let actLength = vehicles.length;
-
     for(i = 0; i<actLength; i++){
       let target = randPointInR(200, center.x, center.y);
       let toAdd = new Vehicle(vehicles[i].position.x, vehicles[i].position.y, target.x, target.y);
@@ -69,9 +68,10 @@ function draw() {
   color(255);
   for (var i = 0; i < vehicles.length; i++) {
       vehic = vehicles[i];
-
+      if (vehic.destiny!=null) {
       vehic.seek();
       vehic.update();
+        }
       vehic.show();
   }
   for (var i = 0; i < bacterias.length; i++) {

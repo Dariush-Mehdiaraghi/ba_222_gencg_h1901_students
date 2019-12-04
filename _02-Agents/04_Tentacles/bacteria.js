@@ -5,11 +5,11 @@ class Bacteria {
     this.direction = createVector();
     this.velocity = createVector();
     this.acceleration = createVector();
-     this.radius = 20
+     this.radius = radius;
     this.maxSpeed = 1;
     this.tentacles = [];
     for (var i = 0; i < numberOfTentacles; i++) {
-      this.tentacles.push(new Tentacle(this.position.x + sin(i)*this.radius, this.position.y + cos(i)*this.radius, 500));
+      this.tentacles.push(new Tentacle(this.position.x + sin(i)*this.radius, this.position.y + cos(i)*this.radius, windowWidth/20));
     }
 }
 

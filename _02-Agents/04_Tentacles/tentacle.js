@@ -6,7 +6,7 @@ class Tentacle {
     this.target = createVector();
     this.newTargetIndex = 0;
     this.isSearching = true;
-    this.segmentLength = 1
+    this.segmentLength = 3
     for (let i = 0; i < numberOfSegments; i++) {
        const segment = new Segment(0,0,this.segmentLength,1);
        this.segments.push(segment);
