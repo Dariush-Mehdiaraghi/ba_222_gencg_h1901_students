@@ -3,7 +3,7 @@ class Tentacle {
   constructor(x, y, numberOfSegments) {
     this.base = createVector(x,y);
     this.segments = [];
-    this.target = createVector(1,2);
+    this.target = createVector();
     this.newTargetIndex = 0;
     this.isSearching = true;
     this.segmentLength = 1
@@ -17,11 +17,11 @@ isInRange(pos){
 }
 
 calculateTargetXY(particles) {
- const ratio = 0.9;
+ const ratio = 0.6;
 
 if (this.isSearching) {
   for (var i = 0; i < particles.length; i++) {
-    if(this.isInRange(particles[i].position)&& this.isSearching && particles[i].destiny == null && !particles[i].found){ //if has no particle grabbed and one is in range
+    if(this.isInRange(particles[i].position)&& particles[i].destiny == null && !particles[i].found){ //if has no particle grabbed and one is in range
         particles[i].destiny = this.base;
         this.newTargetIndex = i;
         this.isSearching = false;
@@ -34,7 +34,7 @@ if (!this.isSearching) {
   this.target.y = ratio * this.target.y + (1 - ratio) * particles[this.newTargetIndex].position.y;
 
 }
-if (particles[this.newTargetIndex].position.dist(this.base)<=50) {
+if (particles[this.newTargetIndex].position.dist(this.base)<=10) {
    particles[this.newTargetIndex].found = true;
    this.isSearching = true;
    //this.newTargetIndex = 0;

@@ -5,13 +5,13 @@ class Vehicle {
     this.position = createVector(posX, posY);
     this.velocity = createVector(velX, velY);
     this.acceleration = createVector();
-    this.maxSpeed = 40;
-    this.maxForce = 0.2;
+    this.maxSpeed = 3;
+    this.maxForce = 2;
     this.found = false;
     this.terminator = false;
   //  this.history = [];
-    this.arriveR = 50;
-    this.fear = 5;
+    this.arriveR = 5;
+    this.fear = 1;
     this.lastPosition = createVector(posX, posY);
 }
 
@@ -19,25 +19,28 @@ class Vehicle {
     this.acceleration = vecForce;
   }
   seek(){
-    let desired = p5.Vector.sub(this.destiny, this.position);
-    if(desired.mag() < this.arriveR && desired.mag() > this.arriveR - 2){
-      this.found = true;
-    }
-    else {
-      this.found = false;
-    }
-    if(desired.mag() < this.arriveR){
-      let m = map(desired.mag(),0,this.arriveR,0,this.maxSpeed);
-      desired.setMag(m);
-    }
-      else{
-        desired.setMag(this.maxSpeed);
-      }
-    let steer = p5.Vector.sub(desired, this.velocity);
-    steer.setMag(this.maxForce);
-    this.applyForce(steer);
-  }
+    if (this.destiny !=null) {
 
+
+      let desired = p5.Vector.sub(this.destiny, this.position);
+      if(desired.mag() < this.arriveR && desired.mag() > this.arriveR - 2){
+        this.found = true;
+      }
+      else {
+        this.found = false;
+      }
+      if(desired.mag() < this.arriveR){
+        let m = map(desired.mag(),0,this.arriveR,0,this.maxSpeed);
+        desired.setMag(m);
+      }
+        else{
+          desired.setMag(this.maxSpeed);
+        }
+        let steer = p5.Vector.sub(desired, this.velocity);
+        steer.setMag(this.maxForce);
+      this.applyForce(steer);
+    }
+    }
   flee(enemies){
 
     let sum = createVector();
@@ -55,7 +58,7 @@ class Vehicle {
   }
     //sum.div(count);
     sum.setMag(this.maxSpeed)
-    //let desired = p5.Vector.sub(this.destiny, this.position);
+    // let desired = p5.Vector.sub(this.destiny, this.position);
     let steer = p5.Vector.sub(sum, this.velocity);
     steer.setMag(this.maxForce);
     this.applyForce(steer);
@@ -80,12 +83,8 @@ show(){
   }
 */
 fill(255)
-circle(this.position.x, this.position.y, 2);
-  extraCanvas.fill(255, 100);
-   this.lastPosition = this.position;
+circle(this.position.x, this.position.y, 5);
 
-  extraCanvas.circle(this.position.x, this.position.y, 4);
-  //circle(this.position.x, this.position.y, windowWidth/200);
 }
 
 }

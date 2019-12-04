@@ -25,18 +25,16 @@ function setup() {
   pixelDensity(2); //Retina
 
   canv = createCanvas(windowWidth, windowHeight);
-  extraCanvas = createGraphics(windowWidth, windowHeight);
-  extraCanvas.clear();
   center = createVector(windowWidth/2, windowHeight/2);
   background(0);
 
   vehicles = [];
   bacterias = [];
-  bacterias.push(new Bacteria(100,100, 6, 50))
-  for(i = 0; i<12; i++){
-    let target = randPointInR(200, center.x, center.y);
-    let toAdd = new Vehicle(center.x, center.y, target.x, target.y)
-    toAdd.velocity = createVector(sin(i),cos(i));
+  bacterias.push(new Bacteria(center.x, center.y, 6, 50))
+  for(i = 0; i<80; i++){
+
+    let toAdd = new Vehicle(random(0,windowWidth), random(0,windowHeight))
+
     vehicles.push(toAdd)
   }
 
@@ -53,7 +51,7 @@ function keyPressed(){
     for(i = 0; i<actLength; i++){
       let target = randPointInR(200, center.x, center.y);
       let toAdd = new Vehicle(vehicles[i].position.x, vehicles[i].position.y, target.x, target.y);
-      //toAdd.velocity = vehicles[i].velocity.mult(random(-1.1,1.1));
+      toAdd.acceleration = createVector(10,20);
 
       vehicles.push(toAdd);
 }
@@ -69,22 +67,17 @@ function draw() {
   noStroke();
   background(0);
   color(255);
-  image(extraCanvas,0,0);
   for (var i = 0; i < vehicles.length; i++) {
       vehic = vehicles[i];
-    if (vehic.destiny!=null &&!vehic.found) {
+
       vehic.seek();
-    }if (!vehic.found) {
-        vehic.flee(vehicles);
-    }
       vehic.update();
       vehic.show();
   }
   for (var i = 0; i < bacterias.length; i++) {
-    push()
-    translate(bacterias[i].position);
-    bacterias[i].move(createVector(mouseX,mouseY));
-    pop()
+
+    //bacterias[i].seek();
+    bacterias[i].update();
     bacterias[i].show(vehicles);
   }
 
