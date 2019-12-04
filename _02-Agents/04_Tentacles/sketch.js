@@ -30,7 +30,8 @@ function setup() {
 
   vehicles = [];
   bacterias = [];
-  bacterias.push(new Bacteria(center.x, center.y, 6, windowWidth/100))
+  bacterias.push(new Bacteria(center.x, center.y, 6, windowWidth/100));
+  //  bacterias.push(new Bacteria(windowWidth/3, center.y, 4, windowWidth/200));
   for(i = 0; i<windowWidth/10; i++){
 
     let toAdd = new Vehicle(random(0,windowWidth), random(0,windowHeight))

@@ -6,7 +6,7 @@ let circles = [];
 let lastScreenPos = {x:null,y:null}
 let lastScrollPos = {x:null,y:null}
 let xAcelleration = 0;
-    // create an engine
+let direction;
 let engine;
 let bottom;
 
@@ -52,6 +52,8 @@ function setup(){
     lastScreenPos.x = screenX;
     lastScreenPos.y = screenY;
     lastScrollPos.y = window.pageYOffset;
+    startTime = new Date();
+    rideDuration = getRideDuration(2);
 }
 
     function mousePressed(){
@@ -61,13 +63,14 @@ function setup(){
     }
     function keyPressed(){
       if (keyCode === 32) setup() // 32 = Space
-      if (keyCode === 38) for (var i = 0; i < circles.length; i++) {circles[i].applyAForce(0,windowWidth*0.0008)}; // 38 = ArrowUp
-      if (keyCode === 40) for (var i = 0; i < circles.length; i++) {circles[i].applyAForce(0,-windowWidth*0.0008)}; // 40 = ArrowDown
+      if (keyCode === 38) direction = 'up' ; // 38 = ArrowUp
+      if (keyCode === 40) direction = 'down'; // 40 = ArrowDown
+      if (keyCode >= 48 && keyCode <= 57) rideDuration = getRideDuration(toInt(key)) // 48...57 = Digits
     }
     function windowResized(){
-        if (windowWidth>500){
-      resizeCanvas(windowWidth, windowHeight*1.3);
-        }
+      if (windowWidth>500){
+          resizeCanvas(windowWidth, windowHeight*1.3);
+      }
 
     }
     function handleMotion(devicemotion) {
@@ -76,6 +79,11 @@ function setup(){
     }
 
     function draw(){
+      let t = (new Date() - startTime) / 1000;
+      stepSize = animate(t, 0, 2, rideDuration, 2.5);
+      stepSize = (direction === 'up') ? +stepSize : -stepSize;
+      console.log(stepSize);
+  engine.world.gravity.y = stepSize*2;
       Engine.update(engine)
       //background(0,0,0);
       //bottom.show();

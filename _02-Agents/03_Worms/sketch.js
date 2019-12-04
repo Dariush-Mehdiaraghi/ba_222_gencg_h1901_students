@@ -23,10 +23,10 @@ function randPointInRing(radius1, radius2, pointX, pointY){
 
 
 function setup() {
+  const app = new PIXI.Application();
+  document.body.appendChild(app.view);
 
   p5.disableFriendlyErrors = true;
-
-
   pixelDensity(1); //Retina
 
   canv = createCanvas(windowWidth, windowHeight);

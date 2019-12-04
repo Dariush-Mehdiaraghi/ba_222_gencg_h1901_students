@@ -1,14 +1,11 @@
 ---
 layout: sketch
-title: "Gravity"
+title: "Tentacles"
 category: "Experiment"
-thumb_name: "thumbGrv.png"
+thumb_name: "thumbTt.png"
 includes:
   - src: "sketch.js"
-  - src: "bole.js"
-  - src: "rigid.js"
-  - src: "../../js/matter.min.js"
-  - src: "../../js/utils.js"
+  - src: "planet.js"
 ---
 
 <!--
