@@ -66,9 +66,7 @@ two.bind('update', function(frameCount) {
       //let target = randPointInR(200, center.x, center.y);
       let toAdd = new Vehicle(vehicles[i].position.x, vehicles[i].position.y);
       //toAdd.velocity = vehicles[i].velocity.mult(random(-1.1,1.1));
-
       vehicles.push(toAdd);
-
   }
 }
 //  background(0);
