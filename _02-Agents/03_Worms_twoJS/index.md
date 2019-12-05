@@ -4,9 +4,10 @@ title: "Worms"
 category: "Experiment"
 thumb_name: "thumbWrm.png"
 includes:
+  - src: "https://cdnjs.cloudflare.com/ajax/libs/two.js/0.6.0/two.min.js"
   - src: "sketch.js"
   - src: "vehicle.js"
-  - src: "https://cdnjs.cloudflare.com/ajax/libs/two.js/0.6.0/two.min.js"
+
 ---
 
 <!--
