@@ -1,6 +1,7 @@
 
 class Vehicle {
   constructor(posX, posY, targX, targY, velX, velY) {
+
     this.target = createVector(targX, targY);
     this.position = createVector(posX, posY);
     this.velocity = createVector(velX, velY);
@@ -13,6 +14,7 @@ class Vehicle {
     this.arriveR = 50;
     this.fear = 5;
     this.lastPosition = createVector(posX, posY);
+
 }
 
   applyForce(vecForce){
@@ -49,7 +51,7 @@ class Vehicle {
         let diff = p5.Vector.sub(this.position, enemy.position);
         diff.normalize();
         diff.div(d)
-        sum.add(diff.x,diff.y);
+        sum.add(diff);
         count++;
     }
   }
@@ -73,19 +75,9 @@ class Vehicle {
 }
 show(){
 
-/*   if(this.terminator){
-    stroke(200,255,0)
-  }else {
-      stroke(255);
-  }
-*/
-fill(sin(frameCount*0.05)*127+127)
-circle(this.position.x, this.position.y, 2);
+//  fill(sin(frameCount*0.05)*127+127);
 
-   this.lastPosition = this.position;
-
-circle(this.position.x, this.position.y, 4);
-  //circle(this.position.x, this.position.y, windowWidth/200);
+  circle(this.position.x, this.position.y, windowWidth/200);
 }
 
 }

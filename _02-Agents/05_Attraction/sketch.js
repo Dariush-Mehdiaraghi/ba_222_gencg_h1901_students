@@ -11,10 +11,10 @@ myFont = loadFont('FjallaOne-Regular.ttf');
 
 
 function setup() {
-pixelDensity(1); //Retina
-
-center = createVector(windowWidth/2, windowHeight/2); //center point of viewport
-canv = createCanvas(windowWidth*2, windowHeight*2);
+pixelDensity(2); //Retina
+smooth();
+center = createVector(0, 0); //center point of viewport
+canv = createCanvas(windowWidth*2, windowHeight*2, WEBGL);
 for (var i = 0; i < 20; i++) {
   let toAdd =   new Planet(windowWidth/20, 10, center.x+random(0,windowWidth), center.y+random(0,windowHeight));
   toAdd.velocity=createVector(-1,2);

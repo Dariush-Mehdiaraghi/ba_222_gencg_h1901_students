@@ -6,6 +6,7 @@ thumb_name: "thumbWrm.png"
 includes:
   - src: "sketch.js"
   - src: "vehicle.js"
+  - src: "https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"
 ---
 
 <!--

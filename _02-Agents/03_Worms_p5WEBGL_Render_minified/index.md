@@ -1,11 +1,12 @@
 ---
 layout: sketch
-title: "Attraction"
+title: "Worms"
 category: "Experiment"
-thumb_name: "thumbTt.png"
+thumb_name: "thumbWrm.png"
 includes:
   - src: "sketch.js"
-  - src: "planet.js"
+  - src: "vehicle.js"
+  - src: "https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"
 ---
 
 <!--

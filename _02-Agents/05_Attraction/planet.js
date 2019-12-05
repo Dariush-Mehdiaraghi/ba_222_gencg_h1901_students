@@ -24,8 +24,7 @@ attractTo(other){
 }
    show(){
 
-
-
-    circle(this.location.x, this.location.y, this.radius);
+     fill(255);
+     circle(this.location.x,this.location.y,10);
   }
 }
