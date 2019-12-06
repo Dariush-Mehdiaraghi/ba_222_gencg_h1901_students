@@ -11,25 +11,33 @@ myFont = loadFont('FjallaOne-Regular.ttf');
 
 
 function setup() {
-pixelDensity(2); //Retina
+pixelDensity(1); //Retina
 smooth();
-center = createVector(0, 0); //center point of viewport
-canv = createCanvas(windowWidth*2, windowHeight*2, WEBGL);
-for (var i = 0; i < 20; i++) {
-  let toAdd =   new Planet(windowWidth/20, 10, center.x+random(0,windowWidth), center.y+random(0,windowHeight));
-  toAdd.velocity=createVector(-1,2);
+
+center = createVector(windowWidth/2, windowHeight/2); //center point of viewport
+canv = createCanvas(windowWidth, windowHeight);
+for (var i = 0; i < 2000; i++) {
+  let toAdd =   new Planet(windowWidth/20, 10, center.x+windowWidth/10, center.y+random(0,100));
+  toAdd.velocity=createVector(random(-2,2),random(-1,1));
   particles.push(toAdd);
 }
 
-sun =     new Planet(100, 10, center.x, center.y);
-
+sun =     new Planet(100, 10, windowWidth/2, center.y);
+sun2 =     new Planet(100, 10, windowWidth/3*2, center.y);
+background(0);
 }
 
 function draw() {
+  //  background(0,20);
+    sun.mass= sin(frameCount/100)*25+20;
+
 
 for(let i=0; i< particles.length; i++){
-  particles[i].radius = cos(frameCount/200)*20;
+  particles[i].radius = cos(frameCount/90)*windowWidth/100;
+
+
   particles[i].attractTo(sun);
+  particles[i].attractTo(sun2);
                  //P2P Checkbox
 /*  for(let j=0; j< particles.length; j++){
 console.log(    particles[i].location );

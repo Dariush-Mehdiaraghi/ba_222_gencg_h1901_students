@@ -34,6 +34,7 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
   noStroke();
 
+pixelDensity(1)
   vehicles = [];
   for(i = 0; i<12; i++){
     let target = randPointInR(200, center.x, center.y);
@@ -42,6 +43,7 @@ function setup() {
 
     vehicles.push(toAdd)
   }
+  background(0);
 }
 
 function keyPressed(){
@@ -54,14 +56,14 @@ function keyPressed(){
 }
 
 function draw(){
-background(0);
+
    //console.log("is running");
     if (frameCount % 240 == 0){
       for (var i = 0; i < vehicles.length; i++) {
-        vehicles[i].fear += 20;
+        vehicles[i].fear += 30;
       }
     }
-    if (frameCount % 30 == 0 &&vehicles.length<=500) {
+    if (frameCount % 30 == 0 &&vehicles.length<=300) {
      let actLength = vehicles.length;
      for(i = 0; i<actLength; i++){
         //let target = randPointInR(200, center.x, center.y);

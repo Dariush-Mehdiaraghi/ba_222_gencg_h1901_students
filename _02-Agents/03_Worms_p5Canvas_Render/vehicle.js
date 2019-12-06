@@ -41,7 +41,6 @@ class Vehicle {
   }
 
   flee(enemies){
-
     let sum = createVector();
     let count = 0;
     for (var i = 0; i < enemies.length; i++) {

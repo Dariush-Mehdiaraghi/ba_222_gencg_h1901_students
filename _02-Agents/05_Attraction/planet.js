@@ -23,8 +23,9 @@ attractTo(other){
   this.acceleration.add(distanceVec.setMag(force));
 }
    show(){
+     fill(sin(frameCount/32)*255)
+     stroke(sin(frameCount/16)*255,sin(frameCount/32)*10+127,sin(frameCount/31)*10+127);
 
-     fill(255);
-     circle(this.location.x,this.location.y,10);
+     circle(this.location.x,this.location.y, this.radius);
   }
 }

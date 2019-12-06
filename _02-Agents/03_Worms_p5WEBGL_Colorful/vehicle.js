@@ -74,9 +74,7 @@ class Vehicle {
 
 }
 show(){
-
-//  fill(sin(frameCount*0.05)*127+127);
-
+  fill(sin(frameCount*0.05)*127+127, sin(frameCount*0.03)*127+7, sin(frameCount*0.03)*2+127);
   circle(this.position.x, this.position.y, windowWidth/200);
 }
 
