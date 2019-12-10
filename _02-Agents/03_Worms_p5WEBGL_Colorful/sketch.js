@@ -26,15 +26,24 @@ function randPointInRing(radius1, radius2, pointX, pointY){
 
 
 function setup() {
-
+  createCanvas(windowWidth,windowHeight);
+  /*
+  var density = displayDensity();
+    pixelDensity(density);
+    createCanvas(6480 / density, 3840 / density);
+    // Capture settings
+    fps = 60;
+    capturer = new CCapture({ format: 'png', framerate: fps });
+    frameRate(fps);
+    capturer.start();
+    startTime = millis(); //*/
 
   p5.disableFriendlyErrors = true;
   //center = createVector(0, 0); //center in GL
-  center = createVector(windowWidth/2, windowHeight/2); //center in Canvas
-  createCanvas(windowWidth,windowHeight);
+  center = createVector(width/2, height/2); //center in Canvas
+
   noStroke();
 
-pixelDensity(1)
   vehicles = [];
   for(i = 0; i<12; i++){
     let target = randPointInR(200, center.x, center.y);
@@ -56,6 +65,17 @@ function keyPressed(){
 }
 
 function draw(){
+/*  var duration = 5;
+var t = (millis() - startTime)/1000;
+
+// if we have passed t=duration then end the animation.
+if (t > duration) {
+  noLoop();
+  console.log('finished recording.');
+  capturer.stop();
+  capturer.save();
+  return;
+} */
 
    //console.log("is running");
     if (frameCount % 240 == 0){
@@ -83,5 +103,9 @@ function draw(){
       vehic.update();
       vehic.show();
     }
+    // end drawing code
 
+  /*  // handle saving the frame
+    console.log('capturing frame');
+    capturer.capture(document.getElementById('defaultCanvas0')); */
 }

@@ -26,7 +26,13 @@ sun =     new Planet(100, 10, windowWidth/2, center.y);
 sun2 =     new Planet(100, 10, windowWidth/3*2, center.y);
 background(0);
 }
-
+function keyPressed() {
+  if (key == 's' || key == 'S') saveThumb(650, 350);
+}
+function saveThumb(w, h) {
+  let img = get( width/2-w/2, height/2-h/2, w, h);
+  save(img,'thumb.jpg');
+}s
 function draw() {
   //  background(0,20);
     sun.mass= sin(frameCount/100)*25+20;

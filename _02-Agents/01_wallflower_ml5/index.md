@@ -1,11 +1,12 @@
 ---
 layout: sketch
-title: "Wallflower"
+title: "Wallflower_ml5"
 category: "Experiment"
 thumb_name: "thumbWF.png"
 includes:
   - src: "sketch.js"
   - src: "vehicle.js"
+  - src: "https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"
 ---
 
 <!--

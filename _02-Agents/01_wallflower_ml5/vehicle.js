@@ -9,7 +9,6 @@ class Vehicle {
     this.maxForce = 0.1;
     this.found = false;
     this.terminator = false;
-    this.fear = windowWidth/20;
     this.history = [];
     this.arriveR = 40;
     this.lastPosition = createVector(posX, posY);
@@ -39,13 +38,13 @@ class Vehicle {
   }
 
   flee(enemies){
-
+    let fear = windowWidth/20;
     let sum = createVector();
     let count = 0;
     for (var i = 0; i < enemies.length; i++) {
       let enemy = enemies[i]
       let d = p5.Vector.dist(enemy.position, this.position)
-      if((d > 0) && (d < this.fear)){
+      if((d > 0) && (d < fear)){
         let diff = p5.Vector.sub(this.position, enemy.position);
         diff.normalize();
         diff.div(d)

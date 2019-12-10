@@ -2,7 +2,7 @@
 layout: sketch
 title: "Attraction"
 category: "Experiment"
-thumb_name: "thumbTt.png"
+thumb_name: "thumbAt.jpg"
 includes:
   - src: "sketch.js"
   - src: "planet.js"

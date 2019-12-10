@@ -7,12 +7,12 @@ class Vehicle {
     this.acceleration = createVector();
     this.maxSpeed = 3;
     this.maxForce = 0.1;
-    this.found = false;
-    this.terminator = false;
-    this.fear = windowWidth/20;
+    this.fear = windowWidth/10;
+    this.perception = 100;
     this.history = [];
     this.arriveR = 40;
     this.lastPosition = createVector(posX, posY);
+    this.neighborDist = 25;
 }
 
   applyForce(vecForce){
@@ -37,7 +37,49 @@ class Vehicle {
     steer.setMag(this.maxForce);
     this.applyForce(steer);
   }
+  align(vehicles){
+    let sum = createVector();
+    let count = 0;
+    for (var i = 0; i < vehicles.length; i++) {
+      let d = p5.Vector.dist(this.position, vehicles[i].position);
+      if (d>0&& this.neighborDist) {
+        sum.add(vehicles[i].velocity);
+        count++;
 
+      }
+
+    }
+    if (count>0) {
+      sum.div(count);
+      sum.setMag(this.maxSpeed);
+      let steer = p5.Vector.sub(sum,this.velocity);
+      steer.limit(this.maxForce);
+      this.applyForce(steer)
+    }
+
+  }
+  cohesion(vehicles){
+    let sum = createVector();
+    let count = 0;
+    for (var i = 0; i < vehicles.length; i++) {
+      let d = p5.Vector.dist(this.position, vehicles[i].position);
+      if (d>0&& this.neighborDist) {
+        sum.add(vehicles[i].position);
+        count++;
+
+      }
+
+    }
+    if (count>0) {
+      sum.div(count);
+      //sum.setMag(this.maxSpeed);
+      let steer = p5.Vector.sub(sum,this.position);
+
+      steer.limit(this.maxForce);
+      this.applyForce(steer)
+    }
+
+  }
   flee(enemies){
 
     let sum = createVector();
@@ -72,25 +114,6 @@ class Vehicle {
 
 }
 show(){
-
-/*   if(this.terminator){
-    stroke(200,255,0)
-  }else {
-      stroke(255);
-  }
-*/
-
-
-  extraCanvas.fill(255);
-  extraCanvas.stroke(255);
-  /*extraCanvas.strokeWeight(1); // with lines sounds good doesn't work
-  extraCanvas.noFill();
-  extraCanvas.beginShape(LINES);
-   extraCanvas.vertex(this.lastPosition.x, this.lastPosition.y);
-   extraCanvas.vertex(this.position.x, this.position.y);
-   extraCanvas.endShape(); */
-   this.lastPosition = this.position;
-  extraCanvas.circle(this.position.x, this.position.y, 1);
   circle(this.position.x, this.position.y, windowWidth/200);
 }
 

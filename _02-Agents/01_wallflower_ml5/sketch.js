@@ -5,7 +5,7 @@ let video;
 let extraCanvas;
 let poseNet;
 let handHeight;
-
+let info;
 let isInRange = false;
 function randPointInR(radius, pointX, pointY){
   a = random() * 2 * PI;
@@ -25,42 +25,72 @@ function randPointInRing(radius1, radius2, pointX, pointY){
 
 function setup() {
 
+  p5.disableFriendlyErrors = true;
+      console.log('ml5 version:', ml5.version);
   /*mic = new p5.AudioIn();
   mic.start(); */
 
-  pixelDensity(2); //Retina
+  pixelDensity(1); //Retina
 
+ //center point of viewport
   canv = createCanvas(windowWidth, windowHeight);
   extraCanvas = createGraphics(windowWidth, windowHeight);
   extraCanvas.clear();
   center = createVector(windowWidth/2, windowHeight/2);
   background(0);
-  vehicles = [];
+  handHeight = 80;
+  video = createCapture(VIDEO);
+  video.hide();
+  let options = {
+    maxPoseDetections: 2,
+    //imageScaleFactor: 0.5,
+    outputStride: 16
+  }
+  posenet = ml5.poseNet(video,options,modelReady);
+  posenet.on("pose", gotPoses);
+  info = createDiv("RAISE YOUR HANDS!").style("position: fixed; top:50%; color: white; width:100%; text-align:center; font-family: helvetica;)")
+/*
+   textFont(myFont);
+   textSize(160);
+   fill(255);
+   noStroke();
+   let fontPoints = myFont.textToPoints('BEAUTIFUL MATH',center.x-520,center.y+300);
+   for(i = 0; i< fontPoints.length; i++){
+     tree.leaves.push(new Leaf(1, fontPoints[i].x, fontPoints[i].y));
+   }
+*/
+vehicles = [];
 for(i = 0; i<1; i++){
   let target = randPointInR(200, center.x, center.y);
-  let toAdd = new Vehicle(center.x, 0, target.x, target.y)
-  toAdd.velocity = createVector(1,4)
+  let toAdd = new Vehicle(center.x, center.y, target.x, target.y)
+  toAdd.velocity = createVector(random(-1,1),random(-10,5))
   vehicles.push(toAdd)
 
   }
-  noStroke();
+}
+function gotPoses(poses){
+
+if (poses.length>0) {
+  handHeight = max(poses[0].pose.keypoints[7].position.y, poses[0].pose.keypoints[8].position.y);
 }
 
 
+}
+function modelReady(){
+  console.log("Model Ready");
+}
 function keyPressed(){
   if (keyCode === 32){ setup();}// 32 = Space
   if (keyCode === 38){
-    let actLength = vehicles.length;
+    /*let actLength = vehicles.length;
     for(i = 0; i<actLength; i++){
       let target = randPointInR(200, center.x, center.y);
       let toAdd = new Vehicle(vehicles[i].position.x, vehicles[i].position.y, target.x, target.y)
       //toAdd.velocity = vehicles[i].velocity.mult(random(-5,5));
       vehicles.push(toAdd);
-    }
+    }*/
   } ; // 38 = ArrowUp
-  if (keyCode === 40){for (var i = 0; i < vehicles.length; i++) {
-    vehicles[i].fear +=10;
-  }} ; // 40 = ArrowDown
+  //if (keyCode === 40) ; // 40 = ArrowDown
 }
 function draw() {
 /*  console.log(mic.getLevel()); //Explosion with sound
@@ -73,21 +103,23 @@ function draw() {
     vehicles.push(toAdd)
   }
 }*/
-
-if (frameCount % 50 == 0 && vehicles.length<300) {
-
-
-let actLength = vehicles.length;
-for(i = 0; i<actLength; i++){
-  let target = randPointInR(200, center.x, center.y);
-  let toAdd = new Vehicle(vehicles[i].position.x, vehicles[i].position.y, target.x, target.y)
+console.log(handHeight);
+if (handHeight>70){isInRange = false};
+if (handHeight<70 && !isInRange){
+  info.remove();
+  isInRange = true;
+  let actLength = vehicles.length;
+  for(i = 0; i<actLength; i++){
+  //let target = randPointInR(200, center.x, center.y);
+  let toAdd = new Vehicle(vehicles[i].position.x, vehicles[i].position.y)
   //toAdd.velocity = vehicles[i].velocity.mult(random(-5,5));
-  vehicles.push(toAdd);
-}
+  vehicles.push(toAdd)
+  }
 }
 
+  noStroke();
   background(0);
-
+  color(255);
 
   image(extraCanvas,0,0);
   for (var i = 0; i < vehicles.length; i++) {
