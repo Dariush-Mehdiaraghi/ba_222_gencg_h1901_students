@@ -4,8 +4,10 @@ title: "Birds"
 category: "Experiment"
 thumb_name: "thumbWF.png"
 includes:
-  - src: "sketch.js"
+  - src: "quadtree.js"
   - src: "vehicle.js"
+  - src: "sketch.js"
+
 ---
 
 <!--

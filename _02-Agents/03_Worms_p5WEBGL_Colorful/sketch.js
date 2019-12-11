@@ -27,7 +27,7 @@ function randPointInRing(radius1, radius2, pointX, pointY){
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
-  /*
+//  /*
   var density = displayDensity();
     pixelDensity(density);
     createCanvas(6480 / density, 3840 / density);
@@ -65,7 +65,7 @@ function keyPressed(){
 }
 
 function draw(){
-/*  var duration = 5;
+  var duration = 5;
 var t = (millis() - startTime)/1000;
 
 // if we have passed t=duration then end the animation.
@@ -75,7 +75,7 @@ if (t > duration) {
   capturer.stop();
   capturer.save();
   return;
-} */
+}
 
    //console.log("is running");
     if (frameCount % 240 == 0){
@@ -89,9 +89,7 @@ if (t > duration) {
         //let target = randPointInR(200, center.x, center.y);
         let toAdd = new Vehicle(vehicles[i].position.x, vehicles[i].position.y);
         //toAdd.velocity = vehicles[i].velocity.mult(random(-1.1,1.1));
-
         vehicles.push(toAdd);
-
     }
   }
 
@@ -105,7 +103,7 @@ if (t > duration) {
     }
     // end drawing code
 
-  /*  // handle saving the frame
+    // handle saving the frame
     console.log('capturing frame');
-    capturer.capture(document.getElementById('defaultCanvas0')); */
+    capturer.capture(document.getElementById('defaultCanvas0'));
 }

@@ -1,18 +1,16 @@
 
 class Vehicle {
-  constructor(posX, posY, targX, targY, velX, velY) {
+  constructor(posX, posY, targX, targY, color) {
     this.target = createVector(targX, targY);
     this.position = createVector(posX, posY);
-    this.velocity = createVector(velX, velY);
+    this.velocity = createVector();
     this.acceleration = createVector();
-    this.maxSpeed = 3;
-    this.maxForce = 0.1;
-    this.fear = windowWidth/10;
-    this.perception = 100;
-    this.history = [];
-    this.arriveR = 40;
-    this.lastPosition = createVector(posX, posY);
+    this.maxSpeed = 5;
+    this.maxForce = 0.09;
+    this.fear = 200;
+    this.arriveR = 10;
     this.neighborDist = 25;
+    this.color = color;
 }
 
   applyForce(vecForce){
@@ -20,12 +18,7 @@ class Vehicle {
   }
   seek(){
     let desired = p5.Vector.sub(this.target, this.position);
-    if(desired.mag() < this.arriveR && desired.mag() > this.arriveR - 2){
-      this.found = true;
-    }
-    else {
-      this.found = false;
-    }
+
     if(desired.mag() < this.arriveR){
       let m = map(desired.mag(),0,this.arriveR,0,this.maxSpeed);
       desired.setMag(m);
@@ -66,7 +59,6 @@ class Vehicle {
       if (d>0&& this.neighborDist) {
         sum.add(vehicles[i].position);
         count++;
-
       }
 
     }
@@ -87,7 +79,7 @@ class Vehicle {
     for (var i = 0; i < enemies.length; i++) {
       let enemy = enemies[i]
       let d = p5.Vector.dist(enemy.position, this.position)
-      if((d > 0) && (d < this.fear)){
+      if((d > 0) && (d <= this.fear)){
         let diff = p5.Vector.sub(this.position, enemy.position);
         diff.normalize();
         diff.div(d)
@@ -105,16 +97,13 @@ class Vehicle {
   }
 
   update(){
-  // this.seek();
     this.velocity.add(this.acceleration);
     this.position.add(this.velocity);
     this.acceleration.mult(0);
-
-    //  this.history.push(createVector(this.position.x, this.position.y));
-
 }
 show(){
-  circle(this.position.x, this.position.y, windowWidth/200);
+  fill(this.color);
+  circle(this.position.x, this.position.y, this.velocity.mag()*10);
 }
 
 }

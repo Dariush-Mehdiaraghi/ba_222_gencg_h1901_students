@@ -34,11 +34,13 @@ function setup() {
   canv = createCanvas(windowWidth, windowHeight);
 
   center = createVector(windowWidth/2, windowHeight/2);
-  background(0);
+  background("#0D0D0D");
+  let colors = ['#69D2E7', '#A7DBD8', '#E0E4CC', '#F38630', '#FA6900', '#FF4E50', '#F9D423' ]
+
   vehicles = [];
-for(i = 0; i<800; i++){
+for(i = 0; i<400; i++){
   let target = randPointInR(200, center.x, center.y);
-  let toAdd = new Vehicle(center.x +random(-100,100), center.y+random(-100,100), target.x, target.y)
+  let toAdd = new Vehicle(random()*width, center.y+random(-10,10), target.x, target.y, colors[int(random(0,colors.length-1))])
   //toAdd.velocity = createVector(random(-2,2),random(-2,2))
   vehicles.push(toAdd)
 
@@ -68,27 +70,30 @@ function keyPressed(){
 function draw() {
   let quadTree = new QuadTree(boundryCanv, 5);
 
-  background(0);
+  background(0,50);
 
   for (let vehic of vehicles) {
 
+    let point = new Point(vehic.position.x,vehic.position.y,vehic)
+    quadTree.insert(point);
     let range = new Circle(vehic.position.x,vehic.position.y,vehic.fear)
 
     let others = quadTree.query(range);
         //console.log(others);
     vehic.flee(others);
     vehic.update();
-    vehic.cohesion(others)
+    vehic.cohesion(others);
     vehic.update();
+
     vehic.align(others);
     vehic.update();
-    vehic.seek(others);
+
+    vehic.seek();
     vehic.update();
-    let point = new Point(vehic.position.x,vehic.position.y,vehic)
-    quadTree.insert(point);
+
     vehic.show();
   }
-  //quadTree.show();
-//  console.log(quadTree);
+//  quadTree.show();
+// console.log(quadTree);
 
 }
