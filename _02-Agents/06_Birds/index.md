@@ -2,7 +2,7 @@
 layout: sketch
 title: "Birds"
 category: "Experiment"
-thumb_name: "thumbWF.png"
+thumb_name: "thumbBD.png"
 includes:
   - src: "quadtree.js"
   - src: "vehicle.js"

@@ -32,7 +32,7 @@ function keyPressed() {
 function saveThumb(w, h) {
   let img = get( width/2-w/2, height/2-h/2, w, h);
   save(img,'thumb.jpg');
-}s
+}
 function draw() {
   //  background(0,20);
     sun.mass= sin(frameCount/100)*25+20;

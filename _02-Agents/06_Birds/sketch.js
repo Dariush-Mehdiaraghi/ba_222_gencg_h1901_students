@@ -23,6 +23,10 @@ function randPointInRing(radius1, radius2, pointX, pointY){
   return point;
 }
 
+function saveThumb(w, h) {
+  let img = get( width/2-w/2, height/2-h/2, w, h);
+  save(img,'thumb.jpg');
+}
 
 function setup() {
 
@@ -53,6 +57,7 @@ for(i = 0; i<400; i++){
 
 
 function keyPressed(){
+  if (key == 's' || key == 'S') saveThumb(650, 350);
   if (keyCode === 32){ setup();}// 32 = Space
   if (keyCode === 38){
     let actLength = vehicles.length;
