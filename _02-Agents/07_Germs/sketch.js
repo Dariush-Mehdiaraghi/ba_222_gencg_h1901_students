@@ -11,13 +11,22 @@ myFont = loadFont('FjallaOne-Regular.ttf');
 
 
 function setup() {
-pixelDensity(1); //Retina
-//smooth();
+  ///*
+  var density = displayDensity();
+  pixelDensity(density);
+  createCanvas(6480 / density, 3840 / density);
+  // Capture settings
+  fps = 30;
+  capturer = new CCapture({ format: 'png', framerate: fps });
+  frameRate(fps);
+  capturer.start();
+  startTime = millis(); //*/
+
  //let colors = ["#D90416", '#F2059F', '#030BA6', '#03A6A6', "#F29F05"] //C1
  let colors = ["#403B21", '#D9AD5B', '#BF472C', '#D9695F'] //C2
 
-center = createVector(windowWidth/2, windowHeight/2); //center point of viewport
-canv = createCanvas(windowWidth, windowHeight);
+center = createVector(width/2, height/2); //center point of viewport
+//canv = createCanvas(windowWidth, windowHeight);
 for (var i = 0; i <500; i++) {
   let toAdd =   new Planet(windowWidth/10, 4, center.x+windowWidth/10, center.y+random(-100,100),colors[int(random(0,colors.length-1))]);
   toAdd.velocity=createVector(random(-2,2),random(-1,1));
@@ -38,8 +47,18 @@ function saveThumb(w, h) {
   save(img,'thumb.jpg');
 }
 function draw() {
-    //background(0,1);
-    //sun.mass= sin(frameCount/100)*25+20;
+  //  /*
+    var duration = 25;
+    var t = (millis() - startTime)/1000;
+
+    // if we have passed t=duration then end the animation.
+    if (t > duration) {
+    noLoop();
+    console.log('finished recording.');
+    capturer.stop();
+    capturer.save();
+    return;
+  } //*/
 
 sun2.attractTo(sun);
 sun2.update()
@@ -58,4 +77,10 @@ console.log(    particles[i].location );
   particles[i].update();
   particles[i].show();
 }
+// end drawing code
+
+
+// handle saving the frame
+console.log('capturing frame');
+capturer.capture(document.getElementById('defaultCanvas0'));
 }

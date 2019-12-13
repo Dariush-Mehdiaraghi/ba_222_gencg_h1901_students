@@ -32,7 +32,7 @@ function setup() {
     pixelDensity(density);
     createCanvas(6480 / density, 3840 / density);
     // Capture settings
-    fps = 60;
+    fps = 30;
     capturer = new CCapture({ format: 'png', framerate: fps });
     frameRate(fps);
     capturer.start();
@@ -65,8 +65,8 @@ function keyPressed(){
 }
 
 function draw(){
-  var duration = 5;
-var t = (millis() - startTime)/1000;
+  var duration = 30;
+  var t = (millis() - startTime)/1000;
 
 // if we have passed t=duration then end the animation.
 if (t > duration) {
@@ -77,7 +77,7 @@ if (t > duration) {
   return;
 }
 
-  
+
     if (frameCount % 240 == 0){
       for (var i = 0; i < vehicles.length; i++) {
         vehicles[i].fear += 30;

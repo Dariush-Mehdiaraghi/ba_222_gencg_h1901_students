@@ -27,13 +27,23 @@ function setup() {
 
   /*mic = new p5.AudioIn();
   mic.start(); */
+  //  /*
+    var density = displayDensity();
+      pixelDensity(density);
+      createCanvas(6480 / density, 3840 / density);
+      // Capture settings
+      fps = 30;
+      capturer = new CCapture({ format: 'png', framerate: fps });
+      frameRate(fps);
+      capturer.start();
+      startTime = millis(); //*/
 
-  pixelDensity(2); //Retina
 
-  canv = createCanvas(windowWidth, windowHeight);
-  extraCanvas = createGraphics(windowWidth, windowHeight);
+
+//  canv = createCanvas(windowWidth, windowHeight);
+  extraCanvas = createGraphics(width, height);
   extraCanvas.clear();
-  center = createVector(windowWidth/2, windowHeight/2);
+  center = createVector(width/2, height/2);
   background(0);
   vehicles = [];
 for(i = 0; i<1; i++){
@@ -73,8 +83,19 @@ function draw() {
     vehicles.push(toAdd)
   }
 }*/
+var duration = 25;
+var t = (millis() - startTime)/1000;
 
-if (frameCount % 50 == 0 && vehicles.length<300) {
+// if we have passed t=duration then end the animation.
+if (t > duration) {
+noLoop();
+console.log('finished recording.');
+capturer.stop();
+capturer.save();
+return;
+}
+
+if (frameCount % 80 == 0 && vehicles.length<300) {
 
 
 let actLength = vehicles.length;
@@ -133,4 +154,9 @@ if (terminators.length>50) {
       terminators.splice(i, 1)}
 }
 */
+// end drawing code
+
+// handle saving the frame
+console.log('capturing frame');
+capturer.capture(document.getElementById('defaultCanvas0'));
 }

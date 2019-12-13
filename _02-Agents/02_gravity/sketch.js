@@ -82,7 +82,7 @@ function setup(){
       let t = (new Date() - startTime) / 1000;
       stepSize = animate(t, 0, 2, rideDuration, 2.5);
       stepSize = (direction === 'up') ? +stepSize : -stepSize;
-      console.log(stepSize);
+    //  console.log(stepSize);
   engine.world.gravity.y = stepSize*2;
       Engine.update(engine)
       //background(0,0,0);

@@ -29,20 +29,19 @@ function saveThumb(w, h) {
 }
 
 function setup() {
-    /*
-    var density = displayDensity();
-      pixelDensity(density);
-      createCanvas(6480 / density, 3840 / density);
-      // Capture settings
-      fps = 60;
-      capturer = new CCapture({ format: 'png', framerate: fps });
-      frameRate(fps);
-      capturer.start();
-      startTime = millis(); */
+  ///*
+  var density = displayDensity();
+  pixelDensity(density);
+  createCanvas(6480 / density, 3840 / density);
+  // Capture settings
+  fps = 60;
+  capturer = new CCapture({ format: 'png', framerate: fps });
+  frameRate(fps);
+  capturer.start();
+  startTime = millis(); //*/
 
-  pixelDensity(1); //Retina
 
-  canv = createCanvas(windowWidth, windowHeight);
+  //canv = createCanvas(windowWidth, windowHeight);
 
   center = createVector(width/2, height/2);
   background("#012623");
@@ -52,11 +51,11 @@ function setup() {
   //let colors = ['#69D2E7', '#A7DBD8', '#E0E4CC', '#F38630', '#FA6900', '#FF4E50'] //C4
 
   vehicles = [];
-for(i = 0; i<200; i++){
-  let target = randPointInR(200, center.x, center.y);
-  let toAdd = new Vehicle(random()*width, center.y+random(-10,10), target.x, target.y, colors[int(random(0,colors.length))])
-  //toAdd.velocity = createVector(random(-2,2),random(-2,2))
-  vehicles.push(toAdd)
+  for(i = 0; i<500; i++){
+    let target = randPointInR(200, center.x, center.y);
+    let toAdd = new Vehicle(random()*width, center.y+random(-10,10), target.x, target.y, colors[int(random(0,colors.length))])
+    //toAdd.velocity = createVector(random(-2,2),random(-2,2))
+    vehicles.push(toAdd)
 
   }
   boundryCanv = new Rectangle(center.x,center.y,width/2,height/2);
@@ -83,7 +82,8 @@ function keyPressed(){
   }} ; // 40 = ArrowDown
 }
 function draw() {
-/*  var duration = 5;
+//  /*
+  var duration = 30;
   var t = (millis() - startTime)/1000;
 
   // if we have passed t=duration then end the animation.
@@ -93,42 +93,42 @@ function draw() {
   capturer.stop();
   capturer.save();
   return;
-} */
-  let quadTree = new QuadTree(boundryCanv, 9);
-  //background(0,90)
-  background(1,38,35,90)
+} //*/
+let quadTree = new QuadTree(boundryCanv, 9);
+//background(0,90)
+background(1,38,35,90)
 //background(38,38,38,90);//C2
 
 
 
-  for (let vehic of vehicles) {
-    let point = new Point(vehic.position.x,vehic.position.y,vehic)
-    quadTree.insert(point);
+for (let vehic of vehicles) {
+  let point = new Point(vehic.position.x,vehic.position.y,vehic)
+  quadTree.insert(point);
   let range = new Circle(vehic.position.x,vehic.position.y,vehic.fear)
 
-    let others = quadTree.query(range);
-        //console.log(others);
-    vehic.flee(others);
-    vehic.update();
+  let others = quadTree.query(range);
+  //console.log(others);
+  vehic.flee(others);
+  vehic.update();
 
-    vehic.cohesion(others);
-    vehic.update();
+  vehic.cohesion(others);
+  vehic.update();
 
-    vehic.align(others);
-    vehic.update();
+  vehic.align(others);
+  vehic.update();
 
-    vehic.seek();
-    vehic.update();
+  vehic.seek();
+  vehic.update();
 
-    vehic.show();
-  }
-  //quadTree.show();
+  vehic.show();
+}
+//quadTree.show();
 // console.log(quadTree);
 // end drawing code
 
 
 // handle saving the frame
-/*console.log('capturing frame');
-capturer.capture(document.getElementById('defaultCanvas0'));*/
+console.log('capturing frame');
+capturer.capture(document.getElementById('defaultCanvas0'));
 
 }
