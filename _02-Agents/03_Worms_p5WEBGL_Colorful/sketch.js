@@ -27,7 +27,7 @@ function randPointInRing(radius1, radius2, pointX, pointY){
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
-//  /*
+  /*
   var density = displayDensity();
     pixelDensity(density);
     createCanvas(6480 / density, 3840 / density);
@@ -37,7 +37,7 @@ function setup() {
     frameRate(fps);
     capturer.start();
     startTime = millis(); //*/
-
+createCanvas(windowWidth,windowHeight);
   p5.disableFriendlyErrors = true;
   //center = createVector(0, 0); //center in GL
   center = createVector(width/2, height/2); //center in Canvas
@@ -65,7 +65,7 @@ function keyPressed(){
 }
 
 function draw(){
-  var duration = 30;
+/*  var duration = 30;
   var t = (millis() - startTime)/1000;
 
 // if we have passed t=duration then end the animation.
@@ -75,7 +75,7 @@ if (t > duration) {
   capturer.stop();
   capturer.save();
   return;
-}
+} */
 
 
     if (frameCount % 240 == 0){
@@ -103,7 +103,7 @@ if (t > duration) {
     }
     // end drawing code
 
-    // handle saving the frame
+  /*  // handle saving the frame
     console.log('capturing frame');
-    capturer.capture(document.getElementById('defaultCanvas0'));
+    capturer.capture(document.getElementById('defaultCanvas0'));*/
 }
