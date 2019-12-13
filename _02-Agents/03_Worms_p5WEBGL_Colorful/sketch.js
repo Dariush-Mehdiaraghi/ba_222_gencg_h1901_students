@@ -77,7 +77,7 @@ if (t > duration) {
   return;
 }
 
-   //console.log("is running");
+  
     if (frameCount % 240 == 0){
       for (var i = 0; i < vehicles.length; i++) {
         vehicles[i].fear += 30;

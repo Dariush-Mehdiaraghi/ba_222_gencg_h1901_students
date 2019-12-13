@@ -1,11 +1,11 @@
 ---
 layout: sketch
-title: "Worms"
+title: "Attraction"
 category: "Experiment"
-thumb_name: "thumbWrm.png"
+thumb_name: "thumbGS.jpg"
 includes:
   - src: "sketch.js"
-  - src: "vehicle.js"
+  - src: "planet.js"
 ---
 
 <!--

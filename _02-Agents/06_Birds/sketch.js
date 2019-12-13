@@ -29,22 +29,32 @@ function saveThumb(w, h) {
 }
 
 function setup() {
-
-  /*mic = new p5.AudioIn();
-  mic.start(); */
+    /*
+    var density = displayDensity();
+      pixelDensity(density);
+      createCanvas(6480 / density, 3840 / density);
+      // Capture settings
+      fps = 60;
+      capturer = new CCapture({ format: 'png', framerate: fps });
+      frameRate(fps);
+      capturer.start();
+      startTime = millis(); */
 
   pixelDensity(1); //Retina
 
   canv = createCanvas(windowWidth, windowHeight);
 
-  center = createVector(windowWidth/2, windowHeight/2);
-  background("#0D0D0D");
-  let colors = ['#69D2E7', '#A7DBD8', '#E0E4CC', '#F38630', '#FA6900', '#FF4E50', '#F9D423' ]
+  center = createVector(width/2, height/2);
+  background("#012623");
+  // let colors = ["#D90416", '#F2059F', '#030BA6', '#03A6A6', "#F29F05"] //C1
+  //  let colors = ["#403B21", '#D9AD5B', '#BF472C', '#D9695F'] //C2
+  let colors = ['#F28D9F', '#BF7582', '#8C686E', '#012623', '#024034'] //C3
+  //let colors = ['#69D2E7', '#A7DBD8', '#E0E4CC', '#F38630', '#FA6900', '#FF4E50'] //C4
 
   vehicles = [];
-for(i = 0; i<400; i++){
+for(i = 0; i<200; i++){
   let target = randPointInR(200, center.x, center.y);
-  let toAdd = new Vehicle(random()*width, center.y+random(-10,10), target.x, target.y, colors[int(random(0,colors.length-1))])
+  let toAdd = new Vehicle(random()*width, center.y+random(-10,10), target.x, target.y, colors[int(random(0,colors.length))])
   //toAdd.velocity = createVector(random(-2,2),random(-2,2))
   vehicles.push(toAdd)
 
@@ -73,20 +83,34 @@ function keyPressed(){
   }} ; // 40 = ArrowDown
 }
 function draw() {
-  let quadTree = new QuadTree(boundryCanv, 5);
+/*  var duration = 5;
+  var t = (millis() - startTime)/1000;
 
-  background(0,50);
+  // if we have passed t=duration then end the animation.
+  if (t > duration) {
+  noLoop();
+  console.log('finished recording.');
+  capturer.stop();
+  capturer.save();
+  return;
+} */
+  let quadTree = new QuadTree(boundryCanv, 9);
+  //background(0,90)
+  background(1,38,35,90)
+//background(38,38,38,90);//C2
+
+
 
   for (let vehic of vehicles) {
-
     let point = new Point(vehic.position.x,vehic.position.y,vehic)
     quadTree.insert(point);
-    let range = new Circle(vehic.position.x,vehic.position.y,vehic.fear)
+  let range = new Circle(vehic.position.x,vehic.position.y,vehic.fear)
 
     let others = quadTree.query(range);
         //console.log(others);
     vehic.flee(others);
     vehic.update();
+
     vehic.cohesion(others);
     vehic.update();
 
@@ -98,7 +122,13 @@ function draw() {
 
     vehic.show();
   }
-//  quadTree.show();
+  //quadTree.show();
 // console.log(quadTree);
+// end drawing code
+
+
+// handle saving the frame
+/*console.log('capturing frame');
+capturer.capture(document.getElementById('defaultCanvas0'));*/
 
 }

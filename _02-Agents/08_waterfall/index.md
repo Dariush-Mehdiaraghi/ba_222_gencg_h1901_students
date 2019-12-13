@@ -1,11 +1,15 @@
 ---
 layout: sketch
-title: "Worms"
+title: "WaterFall"
 category: "Experiment"
-thumb_name: "thumbWrm.png"
+thumb_name: "thumbWF.jpg"
 includes:
   - src: "sketch.js"
-  - src: "vehicle.js"
+  - src: "bole.js"
+  - src: "rigid.js"
+    - src: "rigidBole.js"
+  - src: "../../js/matter.min.js"
+  - src: "../../js/utils.js"
 ---
 
 <!--
