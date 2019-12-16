@@ -2,12 +2,13 @@
 layout: sketch
 title: "WaterFall"
 category: "Experiment"
-thumb_name: "thumbWF.jpg"
+thumb_name: "thumbWFC.jpg"
 includes:
 - src: "sketch.js"
 - src: "rigidBole.js"
 - src: "../../js/matter.min.js"
 - src: "../../js/utils.js"
+- src: "quadtree.js"
 - src: "bole.js"
 - src: "rigid.js"
 
