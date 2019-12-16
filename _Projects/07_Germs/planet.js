@@ -17,7 +17,7 @@ update(){
   this.acceleration.mult(0);
    }
 attractTo(other){
-  let gravity = width/6000000;
+  let gravity = 0.003;
   let distanceVec = p5.Vector.sub(other.location, this.location);
   let distance =  p5.Vector.sub(other.location, this.location).mag();
 
@@ -26,7 +26,7 @@ attractTo(other){
 }
 flee(other){
 
-  let gravity = width/650000;
+  let gravity =0.006;
   let distanceVec = p5.Vector.sub(other.location, this.location);
   let distance =  p5.Vector.sub(other.location, this.location).mag();
   this.radius = distance*0.1
