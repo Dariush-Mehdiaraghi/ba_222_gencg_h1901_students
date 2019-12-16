@@ -4,12 +4,12 @@ title: "WaterFall"
 category: "Experiment"
 thumb_name: "thumbWF.jpg"
 includes:
+- src: "sketch.js"
 - src: "rigidBole.js"
 - src: "../../js/matter.min.js"
 - src: "../../js/utils.js"
-  - src: "bole.js"
-  - src: "sketch.js"
-  - src: "rigid.js"
+- src: "bole.js"
+- src: "rigid.js"
 
 ---
 
