@@ -41,9 +41,12 @@ function setup() {
 
 
 }
-
-
+function saveThumb(w, h) {
+  let img = get( width/2-w/2, height/2-h/2, w, h);
+  save(img,'thumb.jpg');
+}
 function keyPressed(){
+  if (key == 's' || key == 'S') saveThumb(650, 350);
   if (keyCode === 32){ setup();}// 32 = Space
   if (keyCode === 38){
 
@@ -54,8 +57,8 @@ function keyPressed(){
       toAdd.acceleration = createVector(10,20);
 
       vehicles.push(toAdd);
-}
-}// 38 = ArrowUp
+    }
+  }// 38 = ArrowUp
   if (keyCode === 40){
     for (var i = 0; i < vehicles.length; i++) {
       vehicles[i].fear += 10;
@@ -68,12 +71,12 @@ function draw() {
   background(0);
   color(255);
   for (var i = 0; i < vehicles.length; i++) {
-      vehic = vehicles[i];
-      if (vehic.destiny!=null) {
+    vehic = vehicles[i];
+    if (vehic.destiny!=null) {
       vehic.seek();
       vehic.update();
-        }
-      vehic.show();
+    }
+    vehic.show();
   }
   for (var i = 0; i < bacterias.length; i++) {
 

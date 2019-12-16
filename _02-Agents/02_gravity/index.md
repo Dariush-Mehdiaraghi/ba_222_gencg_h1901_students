@@ -2,7 +2,7 @@
 layout: sketch
 title: "Gravity"
 category: "Experiment"
-thumb_name: "thumbGrv.png"
+thumb_name: "thumbGR.jpg"
 includes:
   - src: "sketch.js"
   - src: "bole.js"

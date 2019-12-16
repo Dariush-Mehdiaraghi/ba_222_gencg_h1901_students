@@ -63,10 +63,16 @@ function setup(){
     }
     function keyPressed(){
       if (keyCode === 32) setup() // 32 = Space
+      if (key == 's' || key == 'S') saveThumb(650, 350);
       if (keyCode === 38) direction = 'up' ; // 38 = ArrowUp
       if (keyCode === 40) direction = 'down'; // 40 = ArrowDown
       if (keyCode >= 48 && keyCode <= 57) rideDuration = getRideDuration(toInt(key)) // 48...57 = Digits
     }
+    function saveThumb(w, h) {
+      let img = get( width/2-w/2, height/2-h/2, w, h);
+      save(img,'thumb.jpg');
+    }
+
     function windowResized(){
       if (windowWidth>500){
           resizeCanvas(windowWidth, windowHeight*1.3);

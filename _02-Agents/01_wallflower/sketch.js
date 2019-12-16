@@ -27,7 +27,7 @@ function setup() {
 
   /*mic = new p5.AudioIn();
   mic.start(); */
-  //  /*
+  /*
     var density = displayDensity();
       pixelDensity(density);
       createCanvas(6480 / density, 3840 / density);
@@ -40,7 +40,7 @@ function setup() {
 
 
 
-//  canv = createCanvas(windowWidth, windowHeight);
+  canv = createCanvas(windowWidth, windowHeight);
   extraCanvas = createGraphics(width, height);
   extraCanvas.clear();
   center = createVector(width/2, height/2);
@@ -56,8 +56,12 @@ for(i = 0; i<1; i++){
   noStroke();
 }
 
-
+function saveThumb(w, h) {
+  let img = get( width/2-w/2, height/2-h/2, w, h);
+  save(img,'thumb.jpg');
+}
 function keyPressed(){
+  if (key == 's' || key == 'S') saveThumb(650, 350);
   if (keyCode === 32){ setup();}// 32 = Space
   if (keyCode === 38){
     let actLength = vehicles.length;
@@ -83,6 +87,7 @@ function draw() {
     vehicles.push(toAdd)
   }
 }*/
+/*
 var duration = 25;
 var t = (millis() - startTime)/1000;
 
@@ -93,7 +98,7 @@ console.log('finished recording.');
 capturer.stop();
 capturer.save();
 return;
-}
+} */
 
 if (frameCount % 80 == 0 && vehicles.length<300) {
 
@@ -155,8 +160,8 @@ if (terminators.length>50) {
 }
 */
 // end drawing code
-
+/*
 // handle saving the frame
 console.log('capturing frame');
-capturer.capture(document.getElementById('defaultCanvas0'));
+capturer.capture(document.getElementById('defaultCanvas0'));*/
 }
