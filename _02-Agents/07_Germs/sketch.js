@@ -11,7 +11,7 @@ myFont = loadFont('FjallaOne-Regular.ttf');
 
 
 function setup() {
-  ///*
+  /*
   var density = displayDensity();
   pixelDensity(density);
   createCanvas(6480 / density, 3840 / density);
@@ -26,7 +26,7 @@ function setup() {
  let colors = ["#403B21", '#D9AD5B', '#BF472C', '#D9695F'] //C2
 
 center = createVector(width/2, height/2); //center point of viewport
-//canv = createCanvas(windowWidth, windowHeight);
+canv = createCanvas(windowWidth, windowHeight);
 for (var i = 0; i <500; i++) {
   let toAdd =   new Planet(windowWidth/10, 4, center.x+windowWidth/10, center.y+random(-100,100),colors[int(random(0,colors.length-1))]);
   toAdd.velocity=createVector(random(-2,2),random(-1,1));
@@ -47,7 +47,7 @@ function saveThumb(w, h) {
   save(img,'thumb.jpg');
 }
 function draw() {
-  //  /*
+  /*
     var duration = 25;
     var t = (millis() - startTime)/1000;
 
@@ -81,6 +81,6 @@ console.log(    particles[i].location );
 
 
 // handle saving the frame
-console.log('capturing frame');
-capturer.capture(document.getElementById('defaultCanvas0'));
+/*console.log('capturing frame');
+capturer.capture(document.getElementById('defaultCanvas0'));*/
 }
