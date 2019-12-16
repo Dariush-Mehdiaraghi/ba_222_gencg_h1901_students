@@ -1,15 +1,14 @@
 ---
 layout: sketch
-title: "WaterFall"
+title: "Dandelion Centered"
 category: "Experiment"
 thumb_name: "thumbWFC.jpg"
 includes:
 - src: "sketch.js"
-- src: "rigidBole.js"
+- src: "vehicle.js"
 - src: "../../js/matter.min.js"
 - src: "../../js/utils.js"
 - src: "quadtree.js"
-- src: "bole.js"
 - src: "rigid.js"
 
 

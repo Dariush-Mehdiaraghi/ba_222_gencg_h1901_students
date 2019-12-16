@@ -1,6 +1,6 @@
 ---
 layout: sketch
-title: "Wallflower"
+title: "Dandelion"
 category: "Experiment"
 thumb_name: "thumbWF.jpg"
 includes:
