@@ -2,7 +2,7 @@
 layout: sketch
 title: "Wallflower_ml5"
 category: "Experiment"
-thumb_name: "thumbWF.png"
+thumb_name: "thumbWF.jpg"
 includes:
   - src: "sketch.js"
   - src: "vehicle.js"
