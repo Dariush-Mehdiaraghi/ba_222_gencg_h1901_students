@@ -24,9 +24,9 @@ function setup() {
 
  //let colors = ["#D90416", '#F2059F', '#030BA6', '#03A6A6', "#F29F05"] //C1
  let colors = ["#403B21", '#D9AD5B', '#BF472C', '#D9695F'] //C2
-
-center = createVector(width/2, height/2); //center point of viewport
 canv = createCanvas(windowWidth, windowHeight);
+center = createVector(width/2, height/2); //center point of viewport
+
 for (var i = 0; i <500; i++) {
   let toAdd =   new Planet(windowWidth/10, 4, center.x+windowWidth/10, center.y+random(-100,100),colors[int(random(0,colors.length-1))]);
   toAdd.velocity=createVector(random(-2,2),random(-1,1));
