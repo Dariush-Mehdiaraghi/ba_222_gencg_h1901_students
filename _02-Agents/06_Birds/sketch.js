@@ -29,7 +29,7 @@ function saveThumb(w, h) {
 }
 
 function setup() {
-  ///*
+/*
   var density = displayDensity();
   pixelDensity(density);
   createCanvas(6480 / density, 3840 / density);
@@ -41,7 +41,7 @@ function setup() {
   startTime = millis(); //*/
 
 
-  //canv = createCanvas(windowWidth, windowHeight);
+  canv = createCanvas(windowWidth, windowHeight);
 
   center = createVector(width/2, height/2);
   background("#012623");
@@ -51,7 +51,7 @@ function setup() {
   //let colors = ['#69D2E7', '#A7DBD8', '#E0E4CC', '#F38630', '#FA6900', '#FF4E50'] //C4
 
   vehicles = [];
-  for(i = 0; i<500; i++){
+  for(i = 0; i<300; i++){
     let target = randPointInR(200, center.x, center.y);
     let toAdd = new Vehicle(random()*width, center.y+random(-10,10), target.x, target.y, colors[int(random(0,colors.length))])
     //toAdd.velocity = createVector(random(-2,2),random(-2,2))
@@ -82,7 +82,7 @@ function keyPressed(){
   }} ; // 40 = ArrowDown
 }
 function draw() {
-//  /*
+ /*
   var duration = 30;
   var t = (millis() - startTime)/1000;
 
@@ -126,9 +126,9 @@ for (let vehic of vehicles) {
 // console.log(quadTree);
 // end drawing code
 
-
+/*
 // handle saving the frame
 console.log('capturing frame');
-capturer.capture(document.getElementById('defaultCanvas0'));
+capturer.capture(document.getElementById('defaultCanvas0'));*/
 
 }

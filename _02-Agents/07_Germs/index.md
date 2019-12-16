@@ -1,6 +1,6 @@
 ---
 layout: sketch
-title: "Attraction"
+title: "Germs"
 category: "Experiment"
 thumb_name: "thumbGS.jpg"
 includes:
