@@ -24,7 +24,7 @@ function setup(){
     World = Matter.World;
     Bodies = Matter.Bodies;
     engine = Engine.create();
-    createCanvas(windowWidth,windowHeight*1.3);
+    createCanvas(windowWidth,windowHeight);
     bottom = null;
     topBorder = null;
     leftBorder = null;
@@ -43,7 +43,7 @@ function setup(){
     mostRightBorder = new rigid(windowWidth, 0, 2, windowHeight, 1);
 
     pixelDensity(1);
-    for (var i = 0; i < windowWidth/20; i++) {
+    for (var i = 0; i < width/20; i++) {
       circles.push(new Bole(random(0,window.width),random(window.height*0.3,window.height*0.5),random(window.width*0.005,window.width*0.02)));
     }
 
