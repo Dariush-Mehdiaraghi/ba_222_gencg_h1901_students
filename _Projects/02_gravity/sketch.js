@@ -18,6 +18,7 @@ let topBorder;
 
 window.addEventListener("devicemotion", handleMotion, true);
 function setup(){
+  frameCount = 0;
     Engine = Matter.Engine,
     //Render = Matter.Render,
     World = Matter.World;
@@ -42,12 +43,12 @@ function setup(){
     mostRightBorder = new rigid(windowWidth, 0, 2, windowHeight, 1);
 
     pixelDensity(1);
-    for (var i = 0; i < windowWidth/30; i++) {
+    for (var i = 0; i < windowWidth/20; i++) {
       circles.push(new Bole(random(0,window.width),random(window.height*0.3,window.height*0.5),random(window.width*0.005,window.width*0.02)));
     }
 
     //  background(0,0,0);
-    engine.world.gravity.y = 0.02;
+    engine.world.gravity.y = 1;
     //  Engine.run(engine);
     lastScreenPos.x = screenX;
     lastScreenPos.y = screenY;
@@ -56,11 +57,7 @@ function setup(){
     rideDuration = getRideDuration(2);
 }
 
-    function mousePressed(){
-      for (var i = 0; i < circles.length; i++) {
-        circles[i].handleClick();
-      }
-    }
+
     function keyPressed(){
       if (keyCode === 32) setup() // 32 = Space
       if (key == 's' || key == 'S') saveThumb(650, 350);
@@ -73,12 +70,9 @@ function setup(){
       save(img,'thumb.jpg');
     }
 
-    function windowResized(){
-      if (windowWidth>500){
-          resizeCanvas(windowWidth, windowHeight*1.3);
-      }
 
-    }
+
+
     function handleMotion(devicemotion) {
         xAcelleration = Number( (devicemotion.acceleration.x).toFixed(2));
         logDiv.html(xAcelleration);
@@ -89,13 +83,18 @@ function setup(){
       stepSize = animate(t, 0, 2, rideDuration, 2.5);
       stepSize = (direction === 'up') ? +stepSize : -stepSize;
     //  console.log(stepSize);
-  engine.world.gravity.y = stepSize*2;
+    if (frameCount<1000 && frameCount>200 && frameCount%50==0) {
+      for (var i = 0; i < circles.length; i++) {
+        circles[i].handleClick()
+      }
+
+    }
       Engine.update(engine)
       //background(0,0,0);
       //bottom.show();
       for (var i = 0; i < circles.length; i++) {
         circles[i].show();
-        circles[i].applyAForce((screenX-lastScreenPos.x)*0.00001 + xAcelleration,(screenY-lastScreenPos.y - (window.pageYOffset-lastScrollPos.y)/3)*0.00001);
+        circles[i].applyAForce((screenX-lastScreenPos.x)*0.00001 + xAcelleration,(screenY-lastScreenPos.y - (window.pageYOffset-lastScrollPos.y)/3)*0.00001+stepSize*0.009);
       }
       lastScreenPos.x = screenX;
       lastScreenPos.y = screenY;

@@ -5,10 +5,10 @@ class Bole {
         this.rad = radius;
         this.originalRad = radius;
         this.color = color;
-        this.restitution = 0.8;
         this.isClicked = false;
         this.options = {
             friction: 0,
+            restitution:0.5
         }
         this.body = Bodies.circle(this.x, this.y, this.rad, this.options);
 //  Matter.Body.setVelocity(this.body, {x:random(-3,3),y:random(-1,1)});
@@ -24,7 +24,7 @@ class Bole {
         rotate(this.body.angle);
         //stroke(255,255,255, 2);
 
-        fill(255, 255, 255, 100);
+        fill(255);
         circle(0, 0, this.rad * 2);
         pop();
         if (this.isClicked) {
