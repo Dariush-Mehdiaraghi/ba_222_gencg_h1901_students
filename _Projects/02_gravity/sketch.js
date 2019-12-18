@@ -47,7 +47,7 @@ function setup(){
       circles.push(new Bole(random(0,window.width),random(window.height*0.3,window.height*0.5),random(window.width*0.005,window.width*0.02)));
     }
 
-    //  background(0,0,0);
+      background(255);
     engine.world.gravity.y = 1;
     //  Engine.run(engine);
     lastScreenPos.x = screenX;
